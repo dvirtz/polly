@@ -321,6 +321,20 @@ if os.name == 'nt':
           vs_version='15'
       ),
       Toolchain(
+          'vs-15-2017-win64-hostX64',
+          'Visual Studio 15 2017 Win64',
+          toolchain='host=x64',
+          arch='amd64',
+          vs_version='15'
+      ),
+      Toolchain(
+          'vs-15-2017-win64-cxx17-hostX64',
+          'Visual Studio 15 2017 Win64',
+          toolchain='host=x64',
+          arch='amd64',
+          vs_version='15'
+      ),
+      Toolchain(
           'vs-15-2017-win64-llvm',
           'Visual Studio 15 2017 Win64',
           toolset='LLVM-vs2014',
