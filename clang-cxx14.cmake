@@ -10,10 +10,9 @@ endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_init.cmake")
 
-polly_init(
-    "clang / c++14 support"
-    "Unix Makefiles"
-)
+# Don't use polly_init (no generator expected)
+set(POLLY_TOOLCHAIN_NAME "clang / c++14 support")
+set(POLLY_TOOLCHAIN_TAG "clang-cxx14")
 
 include("${CMAKE_CURRENT_LIST_DIR}/utilities/polly_common.cmake")
 
