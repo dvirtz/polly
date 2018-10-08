@@ -243,7 +243,7 @@ for i in os.listdir(ci_dir):
     os.remove(dir_item)
 
 cmake_dir = os.path.join(ci_dir, 'cmake')
-ninja_dir = os.path.join(ci_dir, 'ninja')
+ninja_dir = os.path.join(ci_dir, 'ninja_dir')
 
 ### Downloading files
 
@@ -256,9 +256,17 @@ if is_android:
   FileToDownload(url, sha1, android_archive_local, ci_dir)
 
 if is_ninja:
-  ninja = FileToDownload(
-      'https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip',
-      '637cc6e144f5cc7c6388a30f3c32ad81b2e0442e',
+  if platform.system() == 'Linux':
+    url='https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip'
+    sha='987234c4ce45505c21302e097c24efef4873325c'
+  elif platform.system() == 'Darwin':
+    url='https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-mac.zip'
+    sha='8142c497f7dfbdb052a1e31960fdfe2c6f9a5ca2'
+  else:
+    url='https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip',
+    sha='637cc6e144f5cc7c6388a30f3c32ad81b2e0442e'
+  ninja = FileToDownload(url,
+      sha,
       ninja_archive_local,
       ci_dir
   )
@@ -274,6 +282,6 @@ for i in os.listdir(ci_dir):
     else:
       os.rename(src, cmake_dir)
 
-  if i == 'ninja.exe':
+  if i == 'ninja.exe' or i == 'ninja':
     os.mkdir(ninja_dir)
     os.rename(src, os.path.join(ninja_dir, i))
