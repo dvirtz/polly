@@ -186,6 +186,11 @@ parser.add_argument(
     help="Target to build for the 'cmake --build' command"
 )
 
+parser.add_argument(
+    '--generator',
+    help='Generator to use, like Ninja or Unix Makefiles'
+)
+
 def PositiveInt(string):
   value = int(string)
   if value > 0:
@@ -382,7 +387,9 @@ if args.cache:
 if (args.config and not toolchain_entry.multiconfig) or args.config_all:
   generate_command.append("-DCMAKE_BUILD_TYPE={}".format(args.config))
 
-if toolchain_entry.generator:
+if args.generator:
+  generate_command.append('-G{}'.format(args.generator))
+elif toolchain_entry.generator:
   generate_command.append('-G{}'.format(toolchain_entry.generator))
 
 if toolchain_entry.toolset:
