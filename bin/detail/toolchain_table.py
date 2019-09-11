@@ -759,6 +759,7 @@ if os.name == 'posix':
       Toolchain('openbsd-egcc-cxx11-static-std', 'Unix Makefiles'),
       Toolchain('ninja-gcc-7-cxx17-concepts', 'Ninja'),
       Toolchain('ninja-gcc-8-cxx17-concepts', 'Ninja'),
+      Toolchain('ninja-gcc-8-cxx2a-concepts', 'Ninja')
   ]
 
 def get_by_name(name):
